@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{b66b0f6e-ef3c-4e78-a582-f845d6f41521}</ProjectGuid>
+    <AssemblyName>OPCUA2</AssemblyName>
+    <Name>OPCUA2</Name>
+    <RootNamespace>OPCUA2</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="TcDbServer.tcdbsrv">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <!-- This next bit is required unless the macro used to Import your targets is defined in an MSBuild toolset. -->
+  <ProjectExtensions>
+    <ProjectCapabilities>
+      <ProjectConfigurationsDeclaredAsItems />
+      <TcConnectivity />
+    </ProjectCapabilities>
+  </ProjectExtensions>
+</Project>

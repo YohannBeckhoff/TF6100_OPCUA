@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="Echange_OPCUA" Id="{2ca0bbd9-d188-4c20-ba0b-1c64a6c14ad1}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Echange_OPCUA
+VAR
+	Ton_NT_GetTime:Ton;
+	fbGetTime:NT_GetTime;
+	
+	{attribute 'OPC.UA.DA' := '1'}
+	stTIMESTR: Tc2_Utilities.TIMESTRUCT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbGetTime(
+	NETID:= '', 
+	START:= Ton_NT_GetTime.Q, 
+	TMOUT:= DEFAULT_ADS_TIMEOUT, 
+	BUSY=> , 
+	ERR=> , 
+	ERRID=> , 
+	TIMESTR=> stTIMESTR);
+	
+	
+Ton_NT_GetTime(IN:= NOT fbGetTime.BUSY , PT:=T#500MS , Q=> , ET=> );]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

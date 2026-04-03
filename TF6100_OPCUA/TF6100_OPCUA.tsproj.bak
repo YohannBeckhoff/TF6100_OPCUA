@@ -1,0 +1,1797 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.21">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+			<Format>
+				<Printf>%d.%d.%d.%d.%d.%d</Printf>
+				<Parameter>[0]</Parameter>
+				<Parameter>[1]</Parameter>
+				<Parameter>[2]</Parameter>
+				<Parameter>[3]</Parameter>
+				<Parameter>[4]</Parameter>
+				<Parameter>[5]</Parameter>
+			</Format>
+		</DataType>
+		<DataType>
+			<Name GUID="{F2E23DFE-0EF0-465E-B7E5-80E81FA4AB06}" TcBaseType="true">OpcUaDeviceStatus</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>Connected</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<Comment><![CDATA[connection status
+1 = TRUE | 0 = FALSE]]></Comment>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ReadBusy</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<Comment><![CDATA[only active in triggered mode
+1 = TRUE | 0 = FALSE]]></Comment>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>KeepAlives</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000013}">BIT4</Type>
+				<Comment><![CDATA[number of counted keepalive messages
+only active in subscription mode]]></Comment>
+				<BitSize>4</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>StmState</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[client statemachine state
+0 = init  |  1 = connect
+2 = resolve namespace
+3 = get node handles
+4 = polling mode
+5 = triggered mode
+6 = awaiting data change notifications (subscriptions)
+7 = disconnect  |  8 = reset]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{7CD7A8B9-2459-4D9A-A7D6-EA64744B3C97}" TcBaseType="true">OpcUaDeviceControl</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>ResetStm</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<Comment><![CDATA[resetting client by setting bit true]]></Comment>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Execute</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<Comment><![CDATA[in triggered mode set bit true to execute a read/write operation]]></Comment>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Write Enable</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<Comment><![CDATA[enable client wide write operations by setting bit to true]]></Comment>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+		</DataType>
+	</DataTypes>
+	<ImageDatas>
+		<ImageData Id="1000">424de6000000000000007600000028000000100000000e000000010004000000000070000000000000000000000000000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff00dddddddddddddddddd777777777777dddddddddd797ddddddddddddd777ddddddddddddddddddddddddddddddddddddddd00dd0ddddd00dd8088080888808808d0dd0d0dddd0dddd8088080008808888d0dd0d0dd0d0dddd8088080880808808dd00dd000ddd00dddddddddddddddddd</ImageData>
+		<ImageData Id="1001">424de6000000000000007600000028000000100000000e000000010004000000000070000000000000000000000000000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff00dddddddddddddddddd999dddddd999ddd99799999999799ddd999dddddd999dddddddddddddddddddd00dd0ddddd00dd8088080888808808d0dd0d0dddd0dddd8088080008808888d0dd0d0dd0d0dddd8088080880808808dd00dd000ddd00dddddddddddddddddddddddddddddddddd</ImageData>
+		<ImageData Id="1002">424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff8383836d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d838383ff00ffff00ff1d82b51b81b3187eb0167cae1379ab1076a80d73a50b71a3086ea0066c9e046a9c02689a0167994c4c4c8383832287ba67ccff2085b899ffff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff3ba0d399ffff0167996e6e6e258abd67ccff278cbf99ffff7be0ff7be0ff7be0ff7be0ff7be0ff7be0ff7be0ff7be0ff44a9dc99ffff02689a6d6d6d288dc067ccff2d92c599ffff85ebff85ebff85ebff85ebff85ebff85ebff85ebff85ebff4eb3e699ffff046a9c6d6d6d2a8fc267ccff3398cb99ffff91f7ff91f7ff91f7ff91f7ff91f7ff91f7ff91f7ff91f7ff57bcef99ffff066c9e6d6d6d2d92c56fd4ff3499cc99ffff99ffff99ffff99ffff99ffff99ffff99ffff99ffff99ffff60c5f899ffff086ea06e6e6e2f94c77be0ff2d92c5ffffffffffffffffffffffffffffffffffffffffffffffffffffff81e6ffffffff0b71a38c8c8c3196c985ebff81e6ff2d92c52d92c52d92c52d92c52d92c52d92c5288dc02489bc2085b81c81b41b81b31b81b3ff00ff3398cb91f7ff8ef4ff8ef4ff8ef4ff8ef4ff8ef4ffffffffffffffffffffffffffffffff167cae8c8c8cff00ffff00ff3499ccffffff99ffff99ffff99ffff99ffffffffff258abd2287ba1f84b71d82b51b81b3187eb0ff00ffff00ffff00ffff00ff3499ccffffffffffffffffffffffff2a8fc2ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff3499cc3398cb3196c92f94c7ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1003">424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+	</ImageDatas>
+	<Project ProjectGUID="{B282BB32-1EF0-456B-B7B8-F17A2862F692}" Target64Bit="true" ShowHideConfigurations="#x6">
+		<System>
+			<Licenses>
+				<Target>
+					<ManualSelect>{ADDFAE21-8CFE-4AF3-9F46-29C36F985936}</ManualSelect>
+				</Target>
+			</Licenses>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="4" Priority="58" CycleTime="400000" AmsPort="351" AdtTasks="true">
+					<Name>Device 1 (OPC UA Virtual)_Task_58</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{BF73BF7E-439C-492B-9273-E7261810E0C8}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" CopyTmcToTarget="true" CopyTpyToTarget="false" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{EE72326D-A30A-B2A9-0C7E-F2C067FC9672}">
+					<Name>PLC Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id>0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io>
+			<Device Id="1" DevType="160" AmsNetId="192.168.106.243.2.1">
+				<Name>Device 1 (OPC UA Virtual)</Name>
+				<ImageId>1000</ImageId>
+				<AddressInfo>
+					<Pnp>
+						<DeviceDesc></DeviceDesc>
+						<DeviceName></DeviceName>
+						<DeviceData>000000000000</DeviceData>
+					</Pnp>
+				</AddressInfo>
+				<Vars VarGrpType="1">
+					<Name>Inputs</Name>
+					<Var>
+						<Name>Device Status</Name>
+						<Type>WORD</Type>
+					</Var>
+					<Var>
+						<Name>AmsNetId</Name>
+						<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+						<BitOffs>16</BitOffs>
+						<ExternalAddress>16</ExternalAddress>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="2">
+					<Name>Outputs</Name>
+				</Vars>
+				<Image Id="1" AddrType="1" ImageType="1" SizeIn="2" SizeOut="26">
+					<Name>Image</Name>
+				</Image>
+				<Module Id="#x01010010" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+					<Name>Client #1</Name>
+					<ImageId>1001</ImageId>
+					<Xml>
+						<TcSmExtensions>
+							<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+								<DataTypePrefix>OpcUa_</DataTypePrefix>
+							</TcSmExtension>
+						</TcSmExtensions>
+					</Xml>
+					<TmcDesc GUID="{407ED3D9-9116-402D-B312-6151DC527AC7}" TcSmClass="CTComOpcUaObjDef">
+						<Name>OPC UA Client</Name>
+						<CLSID ClassFactory="TcIoOpcUa">{03130080-0000-0000-F000-000000000064}</CLSID>
+						<Info>
+							<ImageData>424de6000000000000007600000028000000100000000e000000010004000000000070000000000000000000000000000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff00dddddddddddddddddd999dddddd999ddd99799999999799ddd999dddddd999dddddddddddddddddddd00dd0ddddd00dd8088080888808808d0dd0d0dddd0dddd8088080008808888d0dd0d0dd0d0dddd8088080880808808dd00dd000ddd00dddddddddddddddddddddddddddddddddd</ImageData>
+							<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679965}"/>
+						</Info>
+						<InitSequence>SO</InitSequence>
+						<Contexts>
+							<Context>
+								<Id>1</Id>
+							</Context>
+						</Contexts>
+						<Interfaces>
+							<Interface>
+								<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+							</Interface>
+						</Interfaces>
+						<Parameters>
+							<Parameter>
+								<Name>AdsPort</Name>
+								<BitSize>16</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000004}">WORD</BaseType>
+								<Default>
+									<Value>0</Value>
+								</Default>
+								<PTCID>#x03131001</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>ServerUrl</Name>
+								<BitSize>2048</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+								<PTCID>#x03130002</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>ReadCycleTime</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>1000</Value>
+								</Default>
+								<PTCID>#x03130003</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>WriteCycleTime</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>1000</Value>
+								</Default>
+								<PTCID>#x03130004</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name HideSubItems="true">ReadLists</Name>
+								<BitSize>4816</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+								<ArrayInfo>
+									<LBound>0</LBound>
+									<Elements>602</Elements>
+								</ArrayInfo>
+								<Default>
+									<Data>00000000</Data>
+								</Default>
+								<PTCID>#x03130005</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>NodesPerRequest</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>100</Value>
+								</Default>
+								<PTCID>#x03130006</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name HideSubItems="true">NamespaceInfo</Name>
+								<BitSize>432</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+								<ArrayInfo>
+									<LBound>0</LBound>
+									<Elements>54</Elements>
+								</ArrayInfo>
+								<Default>
+									<Value>0</Value>
+								</Default>
+								<PTCID>#x03130007</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>ArraySingleWriteMode</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+								<PTCID>#x03130008</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>SecurityMode</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>1</Value>
+								</Default>
+								<PTCID>#x0313000b</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>SecurityPolicy</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>1</Value>
+								</Default>
+								<PTCID>#x0313000c</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>TransportType</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>1</Value>
+								</Default>
+								<PTCID>#x0313000d</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>SessionTimeout</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>5000</Value>
+								</Default>
+								<PTCID>#x0313000e</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>ConnectTimeout</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<Default>
+									<Value>5000</Value>
+								</Default>
+								<PTCID>#x0313000f</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>Username</Name>
+								<BitSize>2048</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+								<PTCID>#x03130010</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>Password</Name>
+								<BitSize>2048</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+								<PTCID>#x03130011</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>StringSize</Name>
+								<BitSize>16</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000004}">WORD</BaseType>
+								<Default>
+									<Value>80</Value>
+								</Default>
+								<PTCID>#x03130012</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>NodeIdByteStringSize</Name>
+								<BitSize>16</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000004}">WORD</BaseType>
+								<Default>
+									<Value>256</Value>
+								</Default>
+								<PTCID>#x03130013</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name HideSubItems="true">DataCollectionSettings</Name>
+								<BitSize>136</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+								<ArrayInfo>
+									<LBound>0</LBound>
+									<Elements>17</Elements>
+								</ArrayInfo>
+								<Default>
+									<Data>00E8030000B00400000500000000000000</Data>
+								</Default>
+								<PTCID>#x03138014</PTCID>
+							</Parameter>
+							<Parameter>
+								<Name>UaIdentTokenType</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+								<PTCID>#x03138015</PTCID>
+							</Parameter>
+						</Parameters>
+						<DataAreas>
+							<DataArea>
+								<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+								<Name>Inputs</Name>
+								<ContextId>1</ContextId>
+								<ByteSize>2</ByteSize>
+								<Symbol>
+									<Name>Status</Name>
+									<BitSize>16</BitSize>
+									<BaseType GUID="{F2E23DFE-0EF0-465E-B7E5-80E81FA4AB06}">OpcUaDeviceStatus</BaseType>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="OutputDst" ChildArea="true">1</AreaNo>
+								<Name>Outputs</Name>
+								<ContextId>1</ContextId>
+								<ByteSize>2</ByteSize>
+								<Symbol>
+									<Name>Control</Name>
+									<BitSize>16</BitSize>
+									<BaseType GUID="{7CD7A8B9-2459-4D9A-A7D6-EA64744B3C97}">OpcUaDeviceControl</BaseType>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+							</DataArea>
+						</DataAreas>
+						<Properties>
+							<Property>
+								<Name>Category</Name>
+								<Value>NeedIoIdleTask</Value>
+							</Property>
+							<Property>
+								<Name>Category</Name>
+								<Value>OpcUaAdsBox</Value>
+							</Property>
+							<Property>
+								<Name>Category</Name>
+								<Value>HideTcComContextPP</Value>
+							</Property>
+							<Property>
+								<Name>Category</Name>
+								<Value>HideTcComInterfacePP</Value>
+							</Property>
+							<Property>
+								<Name>Category</Name>
+								<Value>HideTcComPP</Value>
+							</Property>
+							<Property>
+								<Name>Category</Name>
+								<Value>HideTcComParaPP</Value>
+							</Property>
+							<Property>
+								<Name>Category</Name>
+								<Value>HideTcComDataAreaPP</Value>
+							</Property>
+							<Property>
+								<Name>ChildCategory</Name>
+								<Value>OpcUaNode</Value>
+							</Property>
+						</Properties>
+						<ParentOTCID>#x03010010</ParentOTCID>
+						<ParameterValues>
+							<Value>
+								<Name>AdsPort</Name>
+								<Value>1000</Value>
+							</Value>
+							<Value>
+								<Name>ServerUrl</Name>
+								<String>opc.tcp://YohannM-Nb02:4840</String>
+							</Value>
+							<Value>
+								<Name>ReadCycleTime</Name>
+								<Value>1000</Value>
+							</Value>
+							<Value>
+								<Name>WriteCycleTime</Name>
+								<Value>1000</Value>
+							</Value>
+							<Value>
+								<Name>ReadLists</Name>
+								<Data>01000000400000009a0100000000000008002500000004000000010000001c00000004000000010000002200000004000000010000001d00000004000000010000002500000004000000010000001f00000004000000010000001e00000004000000010000001f00000004000000010000001d000000456368616e67655f4f504355412e737454494d455354522e7744617900000000000000000000456368616e67655f4f504355412e737454494d455354522e774461794f665765656b00000000456368616e67655f4f504355412e737454494d455354522e77486f7572000000000000000000456368616e67655f4f504355412e737454494d455354522e774d696c6c697365636f6e647300456368616e67655f4f504355412e737454494d455354522e774d696e75746500000000000000456368616e67655f4f504355412e737454494d455354522e774d6f6e74680000000000000000456368616e67655f4f504355412e737454494d455354522e775365636f6e6400000000000000456368616e67655f4f504355412e737454494d455354522e775965617200000000000000000090000000880000000000000000000800000000000000000000000000000000000000000000000000000000000000000002000000020000000200000002000000020000000200000002000000020000000d000000000000000d000000000000000d000000000000000d000000000000000d000000000000000d000000000000000d000000000000000d0000000000000030000101400001015000010160000101700001018000010190000101a000010100000000</Data>
+							</Value>
+							<Value>
+								<Name>NodesPerRequest</Name>
+								<Value>100</Value>
+							</Value>
+							<Value>
+								<Name>NamespaceInfo</Name>
+								<Data>05000000000000000000000000000000000000001e00000075726e3a4265636b686f66664175746f6d6174696f6e3a55613a504c4331</Data>
+							</Value>
+							<Value>
+								<Name>ArraySingleWriteMode</Name>
+								<EnumText>FALSE</EnumText>
+							</Value>
+							<Value>
+								<Name>SecurityMode</Name>
+								<Value>3</Value>
+							</Value>
+							<Value>
+								<Name>SecurityPolicy</Name>
+								<Value>6</Value>
+							</Value>
+							<Value>
+								<Name>TransportType</Name>
+								<Value>1</Value>
+							</Value>
+							<Value>
+								<Name>SessionTimeout</Name>
+								<Value>5000</Value>
+							</Value>
+							<Value>
+								<Name>ConnectTimeout</Name>
+								<Value>5000</Value>
+							</Value>
+							<Value>
+								<Name>Username</Name>
+								<String>ym</String>
+							</Value>
+							<Value>
+								<Name>Password</Name>
+								<String>12345</String>
+							</Value>
+							<Value>
+								<Name>StringSize</Name>
+								<Value>80</Value>
+							</Value>
+							<Value>
+								<Name>NodeIdByteStringSize</Name>
+								<Value>256</Value>
+							</Value>
+							<Value>
+								<Name>DataCollectionSettings</Name>
+								<Data>00e8030000b00400000500000000000000</Data>
+							</Value>
+							<Value>
+								<Name>UaIdentTokenType</Name>
+								<Value>1</Value>
+							</Value>
+						</ParameterValues>
+					</TmcDesc>
+					<Module Id="#x01010020" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+						<Name>PLC1.Echange_OPCUA.stTIMESTR</Name>
+						<ImageId>1002</ImageId>
+						<Xml>
+							<TcSmExtensions>
+								<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+									<StringSize>80</StringSize>
+									<NodeIdByteStringSize>256</NodeIdByteStringSize>
+									<DataTypePrefix>OpcUa_</DataTypePrefix>
+								</TcSmExtension>
+							</TcSmExtensions>
+						</Xml>
+						<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB468}" TcSmClass="CTComOpcUaObjDef">
+							<Name>OPC UA Folder</Name>
+							<CLSID ClassFactory="TcIoOpcUa">{03130082-0000-0000-F000-000000000064}</CLSID>
+							<Info>
+								<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff8383836d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d838383ff00ffff00ff1d82b51b81b3187eb0167cae1379ab1076a80d73a50b71a3086ea0066c9e046a9c02689a0167994c4c4c8383832287ba67ccff2085b899ffff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff6fd4ff3ba0d399ffff0167996e6e6e258abd67ccff278cbf99ffff7be0ff7be0ff7be0ff7be0ff7be0ff7be0ff7be0ff7be0ff44a9dc99ffff02689a6d6d6d288dc067ccff2d92c599ffff85ebff85ebff85ebff85ebff85ebff85ebff85ebff85ebff4eb3e699ffff046a9c6d6d6d2a8fc267ccff3398cb99ffff91f7ff91f7ff91f7ff91f7ff91f7ff91f7ff91f7ff91f7ff57bcef99ffff066c9e6d6d6d2d92c56fd4ff3499cc99ffff99ffff99ffff99ffff99ffff99ffff99ffff99ffff99ffff60c5f899ffff086ea06e6e6e2f94c77be0ff2d92c5ffffffffffffffffffffffffffffffffffffffffffffffffffffff81e6ffffffff0b71a38c8c8c3196c985ebff81e6ff2d92c52d92c52d92c52d92c52d92c52d92c5288dc02489bc2085b81c81b41b81b31b81b3ff00ff3398cb91f7ff8ef4ff8ef4ff8ef4ff8ef4ff8ef4ffffffffffffffffffffffffffffffff167cae8c8c8cff00ffff00ff3499ccffffff99ffff99ffff99ffff99ffffffffff258abd2287ba1f84b71d82b51b81b3187eb0ff00ffff00ffff00ffff00ff3499ccffffffffffffffffffffffff2a8fc2ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff3499cc3398cb3196c92f94c7ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+								<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+							</Info>
+							<InitSequence>SO</InitSequence>
+							<Contexts>
+								<Context>
+									<Id>1</Id>
+								</Context>
+							</Contexts>
+							<Interfaces>
+								<Interface>
+									<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+								</Interface>
+								<Interface>
+									<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+								</Interface>
+							</Interfaces>
+							<Parameters>
+								<Parameter>
+									<Name HideSubItems="true">NodeId</Name>
+									<BitSize>280</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+									<ArrayInfo>
+										<LBound>0</LBound>
+										<Elements>35</Elements>
+									</ArrayInfo>
+									<Default>
+										<Data>00000100</Data>
+									</Default>
+									<PTCID>#x03130000</PTCID>
+								</Parameter>
+								<Parameter>
+									<Name>NodeClass</Name>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<Default>
+										<Value>1</Value>
+									</Default>
+									<PTCID>#x03130001</PTCID>
+								</Parameter>
+								<Parameter>
+									<Name>OpcUaNodeNamespaceName</Name>
+									<BitSize>2048</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+									<PTCID>#x03130004</PTCID>
+								</Parameter>
+							</Parameters>
+							<Properties>
+								<Property>
+									<Name>Category</Name>
+									<Value>OpcUaNode</Value>
+								</Property>
+								<Property>
+									<Name>ChildCategory</Name>
+									<Value>OpcUaNode</Value>
+								</Property>
+							</Properties>
+							<ParentOTCID>#x01010010</ParentOTCID>
+							<ParameterValues>
+								<Value>
+									<Name>NodeId</Name>
+									<Data>040000000100000017000000456368616e67655f4f504355412e737454494d45535452</Data>
+								</Value>
+								<Value>
+									<Name>NodeClass</Name>
+									<Value>1</Value>
+								</Value>
+								<Value>
+									<Name>OpcUaNodeNamespaceName</Name>
+									<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+								</Value>
+							</ParameterValues>
+						</TmcDesc>
+						<Module Id="#x01010030" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wDay</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>320</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>40</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<Comment><![CDATA[
+ Day of the month: 1..31 ]]></Comment>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>04000000010000001c000000456368616e67655f4f504355412e737454494d455354522e77446179</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+						<Module Id="#x01010040" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wDayOfWeek</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>368</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>46</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<Properties>
+												<Property>
+													<Name>
+ Day of the week: 0..6 (Sunday </Name>
+													<Value> 0, Monday </Value>
+												</Property>
+											</Properties>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>040000000100000022000000456368616e67655f4f504355412e737454494d455354522e774461794f665765656b</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+						<Module Id="#x01010050" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wHour</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>328</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>41</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<Comment><![CDATA[
+ Hour: 0..23 ]]></Comment>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>04000000010000001d000000456368616e67655f4f504355412e737454494d455354522e77486f7572</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+						<Module Id="#x01010060" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wMilliseconds</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>392</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>49</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<Comment><![CDATA[
+ Milliseconds: 0..999 ]]></Comment>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>040000000100000025000000456368616e67655f4f504355412e737454494d455354522e774d696c6c697365636f6e6473</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+						<Module Id="#x01010070" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wMinute</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>344</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>43</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<Comment><![CDATA[
+ Minute: 0..59 ]]></Comment>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>04000000010000001f000000456368616e67655f4f504355412e737454494d455354522e774d696e757465</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+						<Module Id="#x01010080" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wMonth</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>336</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>42</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<Properties>
+												<Property>
+													<Name>
+ Month: 1..12 (January </Name>
+													<Value> 1, February </Value>
+												</Property>
+											</Properties>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>04000000010000001e000000456368616e67655f4f504355412e737454494d455354522e774d6f6e7468</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+						<Module Id="#x01010090" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wSecond</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>344</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>43</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<Comment><![CDATA[
+ Second: 0..59 ]]></Comment>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>04000000010000001f000000456368616e67655f4f504355412e737454494d455354522e775365636f6e64</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+						<Module Id="#x010100a0" KeepUnrestoredLinks="2" TcSmClass="CTComOpcUaObjDef">
+							<Name>wYear</Name>
+							<ImageId>1003</ImageId>
+							<Xml>
+								<TcSmExtensions>
+									<TcSmExtension Guid="{C81CD753-E8EB-4086-9C43-151D85679965}">
+										<StringSize>80</StringSize>
+										<NodeIdByteStringSize>256</NodeIdByteStringSize>
+										<DataTypePrefix>OpcUa_</DataTypePrefix>
+										<AccessLevel>3</AccessLevel>
+									</TcSmExtension>
+								</TcSmExtensions>
+							</Xml>
+							<TmcDesc GUID="{5FC47F2A-BCE4-4970-884C-C7A1B9EEB467}" TcSmClass="CTComOpcUaObjDef">
+								<Name>OPC UA Variable</Name>
+								<CLSID ClassFactory="TcIoOpcUa">{03130081-0000-0000-F000-000000000064}</CLSID>
+								<Info>
+									<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000030000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff868686000000000000000000000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00868686868686c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ff86868600ff0086868686868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00000000ff00ffff00ffff00ffff00ff86868600ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c000ff00c0c0c0000000ff00ffff00ffff00ffff00ffff00ff868686868686868686868686868686868686868686868686868686868686ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+									<TabExtension GUID="{C81CD753-E8EB-4086-9C43-151D85679966}"/>
+								</Info>
+								<InitSequence>SO</InitSequence>
+								<Contexts>
+									<Context>
+										<Id>1</Id>
+									</Context>
+								</Contexts>
+								<Interfaces>
+									<Interface>
+										<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+									</Interface>
+									<Interface>
+										<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+									</Interface>
+								</Interfaces>
+								<Parameters>
+									<Parameter>
+										<Name HideSubItems="true">NodeId</Name>
+										<BitSize>328</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>41</Elements>
+										</ArrayInfo>
+										<Default>
+											<Data>00000100</Data>
+										</Default>
+										<PTCID>#x03130000</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeClass</Name>
+										<BitSize>32</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+										<Default>
+											<Value>2</Value>
+										</Default>
+										<PTCID>#x03130001</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name HideSubItems="true">ArrayDimensions</Name>
+										<BitSize>0</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+										<ArrayInfo>
+											<LBound>0</LBound>
+											<Elements>0</Elements>
+										</ArrayInfo>
+										<PTCID>#x03130002</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<BitSize>2048</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+										<PTCID>#x03130004</PTCID>
+									</Parameter>
+									<Parameter>
+										<Name>NodeTsStatusProcessData</Name>
+										<BitSize>8</BitSize>
+										<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+										<PTCID>#x03130005</PTCID>
+									</Parameter>
+								</Parameters>
+								<DataAreas>
+									<DataArea>
+										<AreaNo AreaType="InputSrc" ChildArea="true">0</AreaNo>
+										<Name>Inputs</Name>
+										<ContextId>1</ContextId>
+										<ByteSize>2</ByteSize>
+										<Symbol>
+											<Name>Value</Name>
+											<Comment><![CDATA[
+ Year: 1970..2106 ]]></Comment>
+											<BitSize>16</BitSize>
+											<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+											<BitOffs>0</BitOffs>
+										</Symbol>
+									</DataArea>
+								</DataAreas>
+								<Properties>
+									<Property>
+										<Name>Category</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+									<Property>
+										<Name>ChildCategory</Name>
+										<Value>OpcUaNode</Value>
+									</Property>
+								</Properties>
+								<ParentOTCID>#x01010020</ParentOTCID>
+								<ParameterValues>
+									<Value>
+										<Name>NodeId</Name>
+										<Data>04000000010000001d000000456368616e67655f4f504355412e737454494d455354522e7759656172</Data>
+									</Value>
+									<Value>
+										<Name>NodeClass</Name>
+										<Value>2</Value>
+									</Value>
+									<Value>
+										<Name>OpcUaNodeNamespaceName</Name>
+										<String>urn:BeckhoffAutomation:Ua:PLC1</String>
+									</Value>
+									<Value>
+										<Name>NodeTsStatusProcessData</Name>
+										<EnumText>FALSE</EnumText>
+									</Value>
+								</ParameterValues>
+							</TmcDesc>
+						</Module>
+					</Module>
+				</Module>
+				<ModuleDev GUID="{407ED3D9-9116-402D-B302-6151DC527BC7}">
+					<Name>Virtual OPC UA Device</Name>
+					<CLSID ClassFactory="TcIoOpcUa">{0313007E-0000-0000-F000-000000000064}</CLSID>
+					<Info>
+						<ImageData>424de6000000000000007600000028000000100000000e000000010004000000000070000000000000000000000000000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff00dddddddddddddddddd777777777777dddddddddd797ddddddddddddd777ddddddddddddddddddddddddddddddddddddddd00dd0ddddd00dd8088080888808808d0dd0d0dddd0dddd8088080008808888d0dd0d0dd0d0dddd8088080880808808dd00dd000ddd00dddddddddddddddddd</ImageData>
+						<TabExtension GUID="{D676C741-E846-4748-B535-2B47E2C82C01}"/>
+					</Info>
+					<Licenses>
+						<License>
+							<LicenseId>{BDCC0070-42D5-49AE-ABF1-1D4434813D60}</LicenseId>
+						</License>
+					</Licenses>
+					<InitSequence>PSO</InitSequence>
+					<Contexts>
+						<Context>
+							<Id>1</Id>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>58</Priority>
+							<CycleTime>40000000</CycleTime>
+						</Context>
+					</Contexts>
+					<Interfaces>
+						<Interface>
+							<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+						</Interface>
+						<Interface>
+							<Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
+						</Interface>
+						<Interface>
+							<Type GUID="{03000011-0000-0000-E000-000000000064}">ITcIoCyclic</Type>
+						</Interface>
+						<Interface>
+							<Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
+						</Interface>
+						<Interface>
+							<Type GUID="{00000022-0000-0000-E000-000000000064}">ITComObjectParent</Type>
+						</Interface>
+					</Interfaces>
+					<Parameters>
+						<Parameter>
+							<Name>IoCaller</Name>
+							<BitSize>32</BitSize>
+							<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+							<PTCID>#x03002010</PTCID>
+						</Parameter>
+						<Parameter>
+							<Name>DefaultMapping</Name>
+							<BitSize>32</BitSize>
+							<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+							<Default>
+								<Value>2</Value>
+							</Default>
+							<PTCID>#x03002110</PTCID>
+						</Parameter>
+						<Parameter>
+							<Name>AsyncTaskPrio</Name>
+							<BitSize>16</BitSize>
+							<BaseType GUID="{18071995-0000-0000-0000-000000000004}">WORD</BaseType>
+							<Default>
+								<Value>58</Value>
+							</Default>
+							<PTCID>#x03002111</PTCID>
+						</Parameter>
+						<Parameter>
+							<Name>AsyncTaskId</Name>
+							<BitSize>32</BitSize>
+							<BaseType GUID="{18071995-0000-0000-0000-000000000007}">DWORD</BaseType>
+							<PTCID>#x03002112</PTCID>
+						</Parameter>
+						<Parameter>
+							<Name>Image</Name>
+							<BitSize>32</BitSize>
+							<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+							<PTCID>#x03002030</PTCID>
+						</Parameter>
+						<Parameter>
+							<Name>TcIoOwnAmsNetId</Name>
+							<BitSize>48</BitSize>
+							<SubItem>
+								<Name>netId</Name>
+								<Type GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</Type>
+								<BitSize>48</BitSize>
+								<BitOffs>0</BitOffs>
+							</SubItem>
+							<PTCID>#x03000028</PTCID>
+						</Parameter>
+					</Parameters>
+					<DataAreas>
+						<DataArea>
+							<AreaNo AreaType="InputSrc" AllowChildAreas="true">0</AreaNo>
+							<Name>Inputs</Name>
+							<ContextId>1</ContextId>
+							<ByteSize>26</ByteSize>
+							<Symbol>
+								<Name>Device Status</Name>
+								<BitSize>16</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000004}">WORD</BaseType>
+								<BitOffs>0</BitOffs>
+							</Symbol>
+							<Symbol>
+								<Name>AmsNetId</Name>
+								<BitSize>48</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</BaseType>
+								<BitOffs>16</BitOffs>
+							</Symbol>
+						</DataArea>
+						<DataArea>
+							<AreaNo AreaType="OutputDst" AllowChildAreas="true">1</AreaNo>
+							<Name>Outputs</Name>
+							<ContextId>1</ContextId>
+							<ByteSize>2</ByteSize>
+						</DataArea>
+					</DataAreas>
+					<Properties>
+						<Property>
+							<Name>Category</Name>
+							<Value>NeedIoIdleTask</Value>
+						</Property>
+						<Property>
+							<Name>Category</Name>
+							<Value>HideTcComContextPP</Value>
+						</Property>
+						<Property>
+							<Name>Category</Name>
+							<Value>HideTcComInterfacePP</Value>
+						</Property>
+						<Property>
+							<Name>Category</Name>
+							<Value>HideTcComPP</Value>
+						</Property>
+						<Property>
+							<Name>Category</Name>
+							<Value>HideTcComParaPP</Value>
+						</Property>
+						<Property>
+							<Name>Category</Name>
+							<Value>HideTcComDataAreaPP</Value>
+						</Property>
+						<Property>
+							<Name>ChildCategory</Name>
+							<Value>OpcUaAdsBox</Value>
+						</Property>
+					</Properties>
+					<ParameterValues>
+						<Value>
+							<Name>IoCaller</Name>
+							<Value>33620032</Value>
+						</Value>
+						<Value>
+							<Name>DefaultMapping</Name>
+							<Value>2</Value>
+						</Value>
+						<Value>
+							<Name>AsyncTaskPrio</Name>
+							<Value>58</Value>
+						</Value>
+						<Value>
+							<Name>AsyncTaskId</Name>
+							<Value>4</Value>
+						</Value>
+						<Value>
+							<Name>Image</Name>
+							<Value>50593808</Value>
+						</Value>
+						<Value>
+							<Name>TcIoOwnAmsNetId.netId</Name>
+							<Data>c0a86af30201</Data>
+						</Value>
+					</ParameterValues>
+				</ModuleDev>
+			</Device>
+		</Io>
+	</Project>
+</TcSmProject>
