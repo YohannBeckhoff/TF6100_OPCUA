@@ -19,7 +19,7 @@
     <User Name="ym" Auth="OS" Password="" IsRoot="false" MemberOf="Administrators" />
   </Users>
   <Groups>
-    <Group Name="Guests" MemberOf="">
+    <Group Name="Guests">
       <DefaultAccess Namespace="http://opcfoundation.org/UA/" Access="0x0000000B" />
     </Group>
     <Group Name="Users" MemberOf="Guests">
